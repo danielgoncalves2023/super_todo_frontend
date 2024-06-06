@@ -17,8 +17,7 @@ export const Register = async (email: string, password: string, name: string, ge
         })
 
         if (response.ok) {
-            console.log("Usuário cadastrado.")
-            navigate('/dashboard')
+            navigate('/')
         } else {
             console.log('Houve algum erro ao cadastrar usuário.')
         }

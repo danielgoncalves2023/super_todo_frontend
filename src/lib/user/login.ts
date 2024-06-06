@@ -20,8 +20,6 @@ export const Login = async (email: string, password: string, navigate: any, disp
 
             navigate('/dashboard')
             dispatch(loggedIn(user))
-            // TEMPORARIO
-            console.log(user)
         } else {
             console.log('Email ou senha incorretos')
         }

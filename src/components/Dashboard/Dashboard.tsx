@@ -1,44 +1,77 @@
 import { useSelector } from "react-redux"
-import { BackgroundDashboard } from "./Background/Background"
 import { Header } from "./Header/Header"
 import { RootState } from "../../redux"
-import { TodoDiv } from "./TodoDiv/TodoDiv"
-import { useState } from "react"
-import { PopUpNewTodo } from "./PopUpNewTodo/PopUpNewTodo"
+import { Footer } from "./Footer/Footer"
+import { BodyContent } from "./BodyContent/BodyContent"
+import { ConfirmDeleteTodo } from "./PopUps/ConfirmDeleteTodo/ConfirmDeleteTodo"
+import { useEffect, useState } from "react"
+import { NewTask } from "./PopUps/NewTask/NewTask"
+import ITodo from "../../models/Todo"
+import { loadTodos } from "../../lib/todo/loadTodos"
+import { AnimatePresence } from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 export const Dashboard = () => {
-    const loginSlice = useSelector((state: RootState) => state.login.user)
-    const { name, gender, avatar, id_user } = loginSlice
+    const userSlice = useSelector((state: RootState) => state.login.user)
+    const { id_user } = userSlice
+    const todoSelected = useSelector((state: RootState) => state.selected)
 
-    const [PopNewTodo, setPopNewTodo] = useState<boolean>(false);
+    const [deleteTodoOpen, setDeleteTodoOpen] = useState<boolean>(false)
+    const [popNewTask, setPopNewTask] = useState<boolean>(false)
 
-    const openNewTodo = () => {
-        setPopNewTodo(true)
+    const [loadedTodos, setLoadedTodos] = useState<ITodo[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const navigate = useNavigate();
+
+    if(!id_user){
+        navigate('/')
     }
 
-    const closeNewTodo = () => {
-        setPopNewTodo(false)
+    const loadAllTodos = async () => {
+        const todos = await loadTodos(id_user);
+        setLoadedTodos(todos);
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 500);
+    }
+
+    useEffect(() => {
+        loadAllTodos();
+    }, [])
+
+    useEffect(() => {
+        loadAllTodos();
+    }, [loadedTodos])
+
+    const handleCloseNewTask = async () => {
+        await setPopNewTask(false);
     }
 
     return (
-        <BackgroundDashboard>
-            {
-                PopNewTodo &&
-                <PopUpNewTodo id_user={id_user} onClose={closeNewTodo} />
-            }
-            <Header name_user={name} gender_user={gender} avatar={avatar} />
-            <section className="flex flex-col p-5 h-screen w-full">
-                <div className="flex flex-row justify-center gap-3">
-                    <div>
-                        <h1 className="flex justify-center text-xl font-bold mb-5">QUADRO DE TAREFAS</h1>
-                    </div>
-                    <div>
-                        <img src="/src/assets/icons/new_todo.png" alt="new_todo"
-                            className="cursor-pointer size-8" onClick={openNewTodo} />
-                    </div>
-                </div>
-                <TodoDiv id_user={id_user} />
-            </section>
-        </BackgroundDashboard>
+        <>
+            <AnimatePresence>
+                {popNewTask && <NewTask id_todo={todoSelected.id_selected} onClose={handleCloseNewTask} />}
+            </AnimatePresence>
+            <AnimatePresence>
+                {deleteTodoOpen && (
+                    <ConfirmDeleteTodo onClose={setDeleteTodoOpen} />
+                )}
+            </AnimatePresence>
+            <Header user={userSlice} />
+            <BodyContent
+                id_user={id_user}
+                setPopNewTask={setPopNewTask}
+                setDeleteTodoOpen={setDeleteTodoOpen}
+                loadAllTodos={loadAllTodos}
+                isLoading={isLoading}
+                loadedTodos={loadedTodos}
+                popNewTask={popNewTask}
+            />
+            <AnimatePresence>
+                <Footer />
+            </AnimatePresence>
+        </>
     )
 }

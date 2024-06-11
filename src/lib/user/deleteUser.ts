@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const deleteUser = async (id_user: string) => {
-    const ApiURLRegister = 'http://localhost:3333/user/';
+    const ApiURLRegister = `${APIUrl}/user/`;
 
     try {
         const response = await fetch(ApiURLRegister, {

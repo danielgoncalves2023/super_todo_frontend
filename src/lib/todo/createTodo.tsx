@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const createTodo = async (name: string, id_user: string) => {
-    const ApiURLCreateTodo = `http://localhost:3333/user/todo`;
+    const ApiURLCreateTodo = `${APIUrl}/user/todo`;
 
     try {
         const response = await fetch(ApiURLCreateTodo, {

@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const verifyEmailRegister = async (email: string) => {
-    const ApiURLVerifyEmailRegister = `http://localhost:3333/user/${email}/`;
+    const ApiURLVerifyEmailRegister = `${APIUrl}/user/${email}/`;
 
     try {
         const response = await fetch(ApiURLVerifyEmailRegister, {

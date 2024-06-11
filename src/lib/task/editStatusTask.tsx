@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const editStatusTask = async (id_task: string) => {
-    const ApiURLEditStatusTask = `http://localhost:3333/user/todo/task`;
+    const ApiURLEditStatusTask = `${APIUrl}/user/todo/task`;
 
     try {
         const response = await fetch(ApiURLEditStatusTask, {

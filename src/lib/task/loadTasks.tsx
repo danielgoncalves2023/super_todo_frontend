@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const loadTasks = async (id_todo: string) => {
-    const ApiURLLoadTasks = `http://localhost:3333/user/${id_todo}/tasks`;
+    const ApiURLLoadTasks = `${APIUrl}/user/${id_todo}/tasks`;
 
     try {
         const response = await fetch(ApiURLLoadTasks, {

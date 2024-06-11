@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const loadTodos = async (id_user: string) => {
-    const ApiURLLoadTodos = `http://localhost:3333/${id_user}/todos`;
+    const ApiURLLoadTodos = `${APIUrl}/${id_user}/todos`;
 
     try {
         const response = await fetch(ApiURLLoadTodos, {

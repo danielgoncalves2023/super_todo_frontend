@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const changeAvatar = async (src: string, id_user: string) => {
-    const ApiURLChangeAvatar = 'http://localhost:3333/user/avatar';
+    const ApiURLChangeAvatar = `${APIUrl}/user/avatar`;
 
     try {
         const response = await fetch(ApiURLChangeAvatar, {

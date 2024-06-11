@@ -1,6 +1,7 @@
+import { APIUrl } from "../apiURL";
 
 export const deleteTodo = async (id_todo: string) => {
-    const ApiURLdeleteTodo = `http://localhost:3333/user/${id_todo}`;
+    const ApiURLdeleteTodo = `${APIUrl}/user/${id_todo}`;
 
     try {
         const response = await fetch(ApiURLdeleteTodo, {

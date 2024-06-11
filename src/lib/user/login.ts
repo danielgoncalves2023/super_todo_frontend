@@ -1,7 +1,8 @@
 import { loggedIn } from "../../redux/loginSlice/loginSlice";
+import { APIUrl } from "../apiURL";
 
 export const Login = async (email: string, password: string, navigate: any, dispatch: any) => {
-    const ApiURLLogin = 'http://localhost:3333/login/';
+    const ApiURLLogin = `${APIUrl}/login/`;
 
     try {
         const response = await fetch(ApiURLLogin, {

@@ -20,11 +20,12 @@ const selectTodoSlice = createSlice({
             state.name = action.payload.name;
         },
         // Usuário não logado
-        // notSelected: (state) => {
-        //     state = initialState;
-        // }
+        notSelected: (state) => {
+            state.id_selected = initialState.id_selected;
+            state.name = initialState.name;
+        }
     }
 })
 
-export const { selected } = selectTodoSlice.actions;
+export const { selected, notSelected } = selectTodoSlice.actions;
 export default selectTodoSlice.reducer;

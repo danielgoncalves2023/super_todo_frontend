@@ -21,7 +21,7 @@ export const FormLogin = () => {
             <div className="flex h-full flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <div className="flex flex-row justify-center gap-2 items-center">
-                        <img className="size-15" src="./src/assets/icons/logo_login.png" alt="Seu super todo" />
+                        <img className="size-15" src="/src/assets/icons/logo_login.png" alt="Seu super todo" />
                         <h1 className="font-semibold">O seu super TODO!</h1>
                     </div>
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Entre com a sua conta</h2>

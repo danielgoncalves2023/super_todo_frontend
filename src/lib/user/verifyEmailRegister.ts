@@ -6,6 +6,7 @@ export const verifyEmailRegister = async (email: string) => {
     try {
         const response = await fetch(ApiURLVerifyEmailRegister, {
             method: 'GET',
+            mode: 'no-cors',
             headers: {
                 "Content-Type": "application/json"
             }

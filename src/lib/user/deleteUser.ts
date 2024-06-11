@@ -1,10 +1,10 @@
 import { APIUrl } from "../apiURL";
 
 export const deleteUser = async (id_user: string) => {
-    const ApiURLRegister = `${APIUrl}/user/`;
+    const ApiURLDeleteUser = `${APIUrl}/user/`;
 
     try {
-        const response = await fetch(ApiURLRegister, {
+        const response = await fetch(ApiURLDeleteUser, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json"
